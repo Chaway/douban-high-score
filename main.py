@@ -13,6 +13,9 @@ html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
 li = soup.find_all("li", class_="ui-slide-item")
 li = soup.find_all(filter_data_title)
+
+li = sorted(li, key=lambda movie: movie["data-rate"], reverse=1)
+
 for el in li:
     print u"片名：" + el["data-title"]
     if el.has_attr("data-actors") and el["data-actors"] is not "":
